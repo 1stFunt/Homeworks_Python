@@ -1,8 +1,23 @@
 # Создайте класс Матрица. Добавьте методы для: - вывода на печать,
-# сравнения,
-# сложения,
-# *умножения матриц
+# сравнения, сложения, умножения матриц.
 class Matrix:
+    """
+    Класс Matrix представляет матрицу и предоставляет методы для работы с ней.
+    Args:
+        rows (int): Количество строк в матрице.
+        columns (int): Количество столбцов в матрице.
+    Attributes:
+        rows (int): Количество строк в матрице.
+        columns (int): Количество столбцов в матрице.
+        data (list): Двумерный список, представляющий данные матрицы.
+    Methods:
+        fill(elements): Заполняет матрицу значениями из переданного списка элементов.
+        __str__(): Возвращает строковое представление матрицы.
+        __eq__(other): Проверяет, равны ли две матрицы.
+        __mul__(other): Выполняет умножение матрицы на другую матрицу.
+        __add__(other): Выполняет сложение матрицы с другой матрицей.
+    """
+
     def __init__(self, rows, columns):
         self.rows = rows
         self.columns = columns
@@ -38,18 +53,40 @@ class Matrix:
         else:
             raise ValueError("Неподдерживаемый тип умножения.")
 
+    def __add__(self, other):
+        if isinstance(other, Matrix):
+            if self.rows != other.rows or self.columns != other.columns:
+                raise ValueError(
+                    "Размеры матриц не совпадают, сложение невозможно.")
+            result = Matrix(self.rows, self.columns)
+            for i in range(self.rows):
+                for j in range(self.columns):
+                    result.data[i][j] = self.data[i][j] + other.data[i][j]
+            return result
+        else:
+            raise ValueError("Неподдерживаемый тип сложения.")
 
+
+# Пример умножения и сравнения для матриц
 matrix1 = Matrix(2, 3)
 matrix1.fill([1, 2, 3, 4, 5, 6])
 matrix2 = Matrix(3, 2)
 matrix2.fill([7, 8, 9, 10, 11, 12])
-
 print("Матрица 1:")
 print(matrix1)
-print("\nМатрица 2:")
+print("Матрица 2:")
 print(matrix2)
-print("\nСравнение матриц:")
+print("Сравнение матриц:")
 print(matrix1 == matrix2)
-print("\nУмножение матриц:")
+print("Умножение матриц:")
 result_matrix_multiply = matrix1 * matrix2
 print(result_matrix_multiply)
+
+# Пример сложения для матриц
+matrix3 = Matrix(2, 2)
+matrix3.fill([1, 2, 3, 4])
+matrix4 = Matrix(2, 2)
+matrix4.fill([5, 6, 7, 8])
+result_matrix_addition = matrix3 + matrix4
+print("Сложение матриц:")
+print(result_matrix_addition)
