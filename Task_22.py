@@ -36,19 +36,21 @@ class Student:
         self.grades = {subject: {'grades': [], 'test_results': []}
                        for subject in self.subjects}
 
-    def add_grade(self, subject, grade):
+    def add_grades(self, subject, *grades):
         if subject not in self.subjects:
             raise ValueError("Недопустимый предмет")
-        if grade < 2 or grade > 5:
-            raise ValueError("Оценка должна быть от 2 до 5")
-        self.grades[subject]['grades'].append(grade)
+        for grade in grades:
+            if grade < 2 or grade > 5:
+                raise ValueError("Оценка должна быть от 2 до 5")
+        self.grades[subject]['grades'].extend(grades)
 
-    def add_test_result(self, subject, test_result):
+    def add_test_results(self, subject, *test_results):
         if subject not in self.subjects:
             raise ValueError("Недопустимый предмет")
-        if test_result < 0 or test_result > 100:
-            raise ValueError("Результат теста должен быть от 0 до 100")
-        self.grades[subject]['test_results'].append(test_result)
+        for test_result in test_results:
+            if test_result < 0 or test_result > 100:
+                raise ValueError("Результат теста должен быть от 0 до 100")
+        self.grades[subject]['test_results'].extend(test_results)
 
     def average_grade(self, subject):
         if subject not in self.subjects:
@@ -94,20 +96,14 @@ class Student:
 # Пример использования:
 student = Student("Иван", "Иванов", "Иванович", "subjects.csv")
 # Добавление оценок и результатов тестов для Математики
-student.add_grade("Математика", 4)
-student.add_test_result("Математика", 80)
-student.add_grade("Математика", 5)
-student.add_test_result("Математика", 90)
+student.add_grades("Математика", 4, 5)
+student.add_test_results("Математика", 80, 90)
 # Добавление оценок и результатов тестов для Физики
-student.add_grade("Физика", 4)
-student.add_test_result("Физика", 85)
-student.add_grade("Физика", 5)
-student.add_test_result("Физика", 95)
+student.add_grades("Физика", 4, 5)
+student.add_test_results("Физика", 85, 95)
 # Добавление оценок и результатов тестов для Химии
-student.add_grade("Химия", 3)
-student.add_test_result("Химия", 70)
-student.add_grade("Химия", 4)
-student.add_test_result("Химия", 75)
+student.add_grades("Химия", 3, 4)
+student.add_test_results("Химия", 70, 75)
 # Вычисление и вывод средних результатов тестов по всем предметам
 print("Средний результат тестов по каждому предмету:",
       student.subject_average_test_result())
