@@ -7,20 +7,21 @@ import csv
 
 
 class NameDescriptor:
+    def __init__(self, name):
+        self.name = name
+
     def __get__(self, instance, owner):
-        return instance._name
+        return instance.__dict__[self.name]
 
     def __set__(self, instance, value):
-        if not value.isalpha() or not value.istitle():
-            raise ValueError(
-                "ФИО должно начинаться с заглавных букв и содержать только буквы")
-        instance._name = value
-
+        if not value.isalpha() or not value[0].isupper():
+            raise ValueError("ФИО должно содержать только буквы и начинаться с заглавной буквы")
+        instance.__dict__[self.name] = value
 
 class Student:
-    first_name = NameDescriptor()
-    last_name = NameDescriptor()
-    middle_name = NameDescriptor()
+    first_name = NameDescriptor("first_name")
+    last_name = NameDescriptor("last_name")
+    middle_name = NameDescriptor("middle_name")
 
     def __init__(self, first_name, last_name, middle_name, subjects_file):
         self.first_name = first_name
