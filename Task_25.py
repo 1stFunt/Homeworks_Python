@@ -45,9 +45,9 @@ def find_roots(a, b, c):
 
 # Прописать в терминал: python Task_25.py 1 2 1
 parser = argparse.ArgumentParser(description='Решение квадратного уравнения')
-parser.add_argument('a', type=float, help='Коэффициент a')
-parser.add_argument('b', type=float, help='Коэффициент b')
-parser.add_argument('c', type=float, help='Коэффициент c')
+parser.add_argument('-a', type=float, help='Коэффициент a', default=0)
+parser.add_argument('-b', type=float, help='Коэффициент b', default=0)
+parser.add_argument('-c', type=float, help='Коэффициент c', default=0)
 args = parser.parse_args()
 
 try:
