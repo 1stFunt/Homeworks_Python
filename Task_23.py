@@ -7,10 +7,8 @@
 class NoSolutionsError(Exception):
     pass
 
-
 class InfiniteSolutionsError(Exception):
     pass
-
 
 def find_roots(a, b, c):
     try:
