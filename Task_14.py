@@ -1,7 +1,6 @@
 # В модуль с проверкой даты добавьте возможность запуска в терминале с передачей даты на проверку.
 import sys
 
-
 def is_leap_year(year):
     if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
         return True
