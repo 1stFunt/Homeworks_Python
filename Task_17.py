@@ -11,7 +11,6 @@
 """
 import os
 
-
 def batch_rename(file_paths, desired_name, num_digits, initial_extension, final_extension, name_range=None):
     counter = 1
     for file_path in file_paths:
